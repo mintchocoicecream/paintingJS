@@ -13,16 +13,33 @@ body {
     padding: 50px 0;
 }
 
+h1{
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.contents{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
 .canvas {
     width: 650px;
     height: 650px;
     background-color: white;
     border-radius: 15px;
     box-shadow: var(--boxshadow);
+    /* cursor: url('./fill.svg') 5 5, auto; */
 }
 
 .controls {
-    margin-top: 50px;
+    border-radius: 5px;
+    background-color: beige;
+    width: fit-content;
+    margin-left: 20px;
+    padding: 30px 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -52,13 +69,24 @@ body {
     font-size: 12px;
 }
 
+.controls__btns button:hover{
+    background-color: rgb(215, 243, 255);
+}
+
 .controls__btns button:active{
     transform: scale(0.98);
 }
 
 .controls .controls__colors{
     display: flex;
+    flex-direction: column;
+}
 
+.controls__colors .controls__colors__one,
+.controls__colors .controls__colors__two
+{
+    display: flex;
+    margin-top: 10px;
 }
 
 .controls__colors .controls__color {
@@ -67,21 +95,17 @@ body {
     margin: 0 5px;
     border-radius: 50%;
     cursor: pointer;
-    box-shadow:  var(--boxshadow);
+    box-shadow: var(--boxshadow);
 }
 
 @keyframes selectColor {
-    0% {
-        transform: translateY(0px);
+   from {
     }
-    50%{
-        transform: translateY(-10px);
-    }
-    100% {
-        transform: translateY(0px);
+    to{
+        transform: scale(1.2);
     }
 }
 
 .controls__colors .controls__color:hover{
-    animation: selectColor 1s ease-in-out infinite;
+    animation: selectColor .5s ease-in-out both;
 }
