@@ -5,10 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
-    <title>PaintJS</title>
+    <title>Doodling</title>
   </head>
   <body>
-    <h1>CANVAS</h1>
+    <h1>DOODLING</h1>
     <div class="contents">
       <canvas id="jsCanvas" class="canvas"></canvas>
       <div class="controls">
@@ -16,27 +16,38 @@
           <input
             type="range"
             id="jsRange"
-            min="0.1"
+            min="1"
             max="10"
             value="5"
-            step="0.1"
+            step="1"
           />
-          <span>5</span>
+          <span id="jsCurRange" class="controls__crnt">5</span>
         </div>
         <div class="controls__btns">
           <button id="jsPen">Pen</button>
           <button id="jsFill">Fill</button>
-          <button id="jsSave">Save</button>
+          <button id="jsReset">Reset</button>
         </div>
         <div id="jsColors" class="controls__colors">
-          <div class="controls__colors__one">
+          <div class="controls__curColors">
+            <h3>Current Color</h3>
+            <div class="controls__curColorInfo">
+              <span id="curColorInfo">rgb(44, 44, 44)</span>
+              <div
+                id="curColor"
+                class="controls__curColor"
+                style="background-color: #2c2c2c"
+              ></div>
+            </div>
+          </div>
+          <div class="controls__pallete">
             <div
               class="controls__color jsColor"
               style="background-color: #2c2c2c"
             ></div>
             <div
               class="controls__color jsColor"
-              style="background-color: white"
+              style="background-color: rgb(255, 255, 255)"
             ></div>
             <div
               class="controls__color jsColor"
@@ -50,8 +61,6 @@
               class="controls__color jsColor"
               style="background-color: #ffcc00"
             ></div>
-          </div>
-          <div class="controls__colors__two">
             <div
               class="controls__color jsColor"
               style="background-color: #4cd963"
@@ -73,6 +82,13 @@
               style="background-color: #ff29db"
             ></div>
           </div>
+          <div class="controls__selects">
+            <span>+ Add Color</span>
+            <input type="color" />
+          </div>
+        </div>
+        <div class="controls__save">
+          <button id="jsSave">Save</button>
         </div>
       </div>
     </div>

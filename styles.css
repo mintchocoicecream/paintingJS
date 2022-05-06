@@ -14,9 +14,9 @@ body {
 }
 
 h1{
-    font-size: 40px;
+    font-size: 35px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .contents{
@@ -36,24 +36,30 @@ h1{
 
 .controls {
     border-radius: 5px;
-    background-color: beige;
-    width: fit-content;
+    background-color: rgb(240, 224, 255);
+    width: 350px;
     margin-left: 20px;
     padding: 30px 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-shadow: var(--boxshadow);
 }
 
 .controls .controls__range{
     margin-bottom: 30px;
 }
 
+input[type="range"] {
+    width: 250px;
+}
+
 .controls .controls__btns {
     margin-bottom: 30px;
 }
 
-.controls__btns button{
+.controls__btns button,
+.controls__save button{
     all: unset;
     cursor: pointer;
     background-color: white;
@@ -71,6 +77,7 @@ h1{
 
 .controls__btns button:hover{
     background-color: rgb(215, 243, 255);
+    transition: .3s ease-in-out;
 }
 
 .controls__btns button:active{
@@ -80,19 +87,71 @@ h1{
 .controls .controls__colors{
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
-.controls__colors .controls__colors__one,
-.controls__colors .controls__colors__two
-{
+.controls .controls__curColors{
     display: flex;
-    margin-top: 10px;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
 }
 
-.controls__colors .controls__color {
+.controls__curColors h3{
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.controls__curColorInfo{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.controls__curColorInfo span{
+    width: 200px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+
+.controls__curColor{
     width: 50px;
     height: 50px;
-    margin: 0 5px;
+    margin: 5px 5px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: var(--boxshadow);
+}
+
+
+.controls .controls__pallete{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.controls .controls__selects{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+}
+
+.controls__selects input{
+    width: 100px;
+    margin-left: 10px;
+}
+
+.controls__color {
+    width: 50px;
+    height: 50px;
+    margin: 5px 5px;
     border-radius: 50%;
     cursor: pointer;
     box-shadow: var(--boxshadow);
@@ -108,4 +167,18 @@ h1{
 
 .controls__colors .controls__color:hover{
     animation: selectColor .5s ease-in-out both;
+}
+
+.controls__save {
+    width: inherit;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 50px;
+    margin-top: 30px;
+}
+
+.controls__save button:hover{
+    background-color: pink;
+    color: white;
+    transition: .3s ease-in-out;
 }
