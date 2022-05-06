@@ -66,6 +66,7 @@ function handleRangeChange(event){
 
 function handleColorPen(){
     mode = 0;
+    canvas.style.cursor = "url(cursor.cur), auto";
     pen.style.backgroundColor = "rgb(215, 243, 255)";
     fill.style.backgroundColor = "white";
     reset.style.backgroundColor = "white";
@@ -73,6 +74,7 @@ function handleColorPen(){
 
 function handleColorFill(){
     mode = 1;
+    canvas.style.cursor = "url(paint.cur), auto";
     fill.style.backgroundColor = "rgb(215, 243, 255)";
     pen.style.backgroundColor = "white";
     reset.style.backgroundColor = "white";
@@ -80,8 +82,7 @@ function handleColorFill(){
 
 function handleReset(){
     mode = 2;
-    ctx.fillStyle = "white";
-    ctx.fillRect(0,0,canvas.width,canvas.height);
+    canvas.style.cursor = "url(erase.cur), auto";
     reset.style.backgroundColor = "rgb(215, 243, 255)";
     pen.style.backgroundColor = "white";
     fill.style.backgroundColor = "white";
@@ -90,6 +91,9 @@ function handleReset(){
 function handleCanvasClick(){
     if(mode===1){
         ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }else if(mode ===2 ){
+        ctx.fillStyle = "white";
+        ctx.fillRect(0,0,canvas.width,canvas.height);
     }
 }
 
