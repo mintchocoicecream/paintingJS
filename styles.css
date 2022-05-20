@@ -146,13 +146,15 @@ input[type="range"] {
 
 .controls .controls__selects{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     width: 100%;
-    align-items: center;
+    margin-right: 30px;
+    align-items: flex-end;
 }
 
 .controls__selects input{
     width: 100px;
+    margin-top: 5px;
     margin-left: 10px;
 }
 

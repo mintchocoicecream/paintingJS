@@ -9,8 +9,9 @@ const reset = document.getElementById("jsReset");
 const save = document.getElementById("jsSave");
 const curColor = document.getElementById("curColor");
 const colorInfo = document.getElementById("curColorInfo");
+const otherColor = document.getElementById("controlsSelect");
 
-const INITIAL_COLOR = "2c2c2c";
+let INITIAL_COLOR = "2c2c2c";
 const CANVAS_SIZE = 650;
 
 canvas.width = CANVAS_SIZE;
@@ -19,7 +20,6 @@ canvas.height = CANVAS_SIZE;
 ctx.fillStyle = "white";
 ctx.fillRect(0,0,canvas.width,canvas.height);
 ctx.strokeStyle = INITIAL_COLOR;
-ctx.fillStyle = INITIAL_COLOR;
 ctx.lineWidth = 2.5;
 
 pen.style.backgroundColor = "rgb(215, 243, 255)";
@@ -50,12 +50,22 @@ function onMouseMove(event) {
 }
 
 function handleColorClick(event){
-    console.log(event.target.style);
+    // console.log(event.target.style);
     const color = event.target.style.backgroundColor;
-    curColor.style.backgroundColor = color;
-    colorInfo.innerText = color;
-    ctx.strokeStyle = color;
-    ctx.fillStyle = color;
+    INITIAL_COLOR = color;
+    curColor.style.backgroundColor = INITIAL_COLOR;
+    colorInfo.innerText = INITIAL_COLOR;
+    ctx.strokeStyle = INITIAL_COLOR;
+    ctx.fillStyle = INITIAL_COLOR;
+}
+
+function handleOtherColor(event){
+    const oColor = event.target.value;
+    INITIAL_COLOR = oColor;
+    curColor.style.backgroundColor = INITIAL_COLOR;
+    colorInfo.innerText = INITIAL_COLOR;
+    ctx.strokeStyle = INITIAL_COLOR;
+    ctx.fillStyle = INITIAL_COLOR;
 }
 
 function handleRangeChange(event){
@@ -90,6 +100,7 @@ function handleReset(){
 
 function handleCanvasClick(){
     if(mode===1){
+        ctx.fillStyle = INITIAL_COLOR;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
     }else if(mode ===2 ){
         ctx.fillStyle = "white";
@@ -131,6 +142,10 @@ if(pen){
 
 if(fill){
     fill.addEventListener("click", handleColorFill);
+}
+
+if(otherColor) {
+    otherColor.addEventListener("input", handleOtherColor);
 }
 
 if(reset){
