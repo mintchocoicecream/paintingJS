@@ -2,6 +2,7 @@
 
 :root{
     --boxshadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);;
+    --palletecolor: rgb(236, 242, 117);
 }
 
 body {
@@ -37,7 +38,7 @@ h1{
 
 .controls {
     border-radius: 5px;
-    background-color: rgb(236, 242, 117);
+    background-color: var(--palletecolor);
     width: 350px;
     margin-left: 20px;
     padding: 30px 10px;
@@ -100,29 +101,19 @@ input[type="range"] {
 
 .controls .controls__curColors{
     display: flex;
-    flex-direction: column;
-    width: 100%;
+    width: 90%;
     align-items: center;
-    justify-content: center;
-    margin-bottom: 10px;
+    justify-content: space-evenly;
+    margin: 10px;
+    padding: 5px 0;
+    border-radius: 5px;
 }
 
-.controls__curColors h3{
+.controls__curColors h3,
+.controls__selects label{
     font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.controls__curColorInfo{
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-}
-
-.controls__curColorInfo span{
-    width: 200px;
-    text-align: center;
-    color: rgba(0, 0, 0, 0.5);
+    border-radius: 3px;
+    background-color: rgba(240, 248, 255, 0.8);
 }
 
 
@@ -141,7 +132,7 @@ input[type="range"] {
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .controls .controls__selects{
@@ -152,10 +143,24 @@ input[type="range"] {
     align-items: flex-end;
 }
 
+.controls__selects label{
+    margin-right: 2px;
+    padding: 0 3px;
+}
+
 .controls__selects input{
-    width: 100px;
+    width: 110px;
+    height: 30px;
     margin-top: 5px;
-    margin-left: 10px;
+    padding: 0 5px;
+    border: 1px solid rgb(156, 156, 156);
+    border-radius: 5px;
+    background-color: var(--palletecolor);
+    cursor: pointer;
+}
+
+.controls__selects input:hover{
+    background-color: #edff48;
 }
 
 .controls__color {

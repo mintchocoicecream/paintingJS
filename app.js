@@ -8,7 +8,6 @@ const fill = document.getElementById("jsFill");
 const reset = document.getElementById("jsReset");
 const save = document.getElementById("jsSave");
 const curColor = document.getElementById("curColor");
-const colorInfo = document.getElementById("curColorInfo");
 const otherColor = document.getElementById("controlsSelect");
 
 let INITIAL_COLOR = "2c2c2c";
@@ -54,7 +53,6 @@ function handleColorClick(event){
     const color = event.target.style.backgroundColor;
     INITIAL_COLOR = color;
     curColor.style.backgroundColor = INITIAL_COLOR;
-    colorInfo.innerText = INITIAL_COLOR;
     ctx.strokeStyle = INITIAL_COLOR;
     ctx.fillStyle = INITIAL_COLOR;
 }
@@ -63,7 +61,6 @@ function handleOtherColor(event){
     const oColor = event.target.value;
     INITIAL_COLOR = oColor;
     curColor.style.backgroundColor = INITIAL_COLOR;
-    colorInfo.innerText = INITIAL_COLOR;
     ctx.strokeStyle = INITIAL_COLOR;
     ctx.fillStyle = INITIAL_COLOR;
 }
