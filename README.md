@@ -3,6 +3,7 @@ Painting Board with VanillaJS
 
 ## Reference
 - Canvas API: https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API
+- Cursor Editor: https://www.cursor.cc/
 
 ## Results
 <div>
