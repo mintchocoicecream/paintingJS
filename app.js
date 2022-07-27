@@ -9,6 +9,8 @@ const reset = document.getElementById("jsReset");
 const save = document.getElementById("jsSave");
 const curColor = document.getElementById("curColor");
 const otherColor = document.getElementById("controlsSelect");
+const fileInput = document.getElementById("file");
+
 
 let INITIAL_COLOR = "2c2c2c";
 const CANVAS_SIZE = 650;
@@ -105,6 +107,17 @@ function handleCanvasClick(){
     }
 }
 
+function onFileChange(event){
+    const file = event.target.files[0];
+    const url = URL.createObjectURL(file);
+    const image = new Image();
+    image.src = url;
+    image.onload = function(){
+        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+        fileInput.value = null;
+    }
+}
+
 function handleCM(event){
     event.preventDefault();
 }
@@ -128,6 +141,8 @@ if(canvas){
 
 
 Array.from(colors).forEach(color => color.addEventListener("click", handleColorClick));
+fileInput.addEventListener("change", onFileChange);
+
 
 if(range){
     range.addEventListener("input", handleRangeChange);
