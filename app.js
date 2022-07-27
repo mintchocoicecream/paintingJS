@@ -125,9 +125,9 @@ function handleCM(event){
 }
 
 function handleSaveBtn(){
-    const image = canvas.toDataURL();
+    const imageUrl = canvas.toDataURL();
     const link = document.createElement("a");
-    link.href = image;
+    link.href = imageUrl;
     link.download = "Masterpiece";
     link.click();
 }
@@ -138,7 +138,7 @@ function onDoubleClick(event){
         ctx.save();
         ctx.lineWidth = 1;
         ctx.font = "25px serif";
-        ctx.fillText(text, event.offsetX, event.offsetY);
+        ctx.strokeText(text, event.offsetX, event.offsetY);
         ctx.restore();
     };
 }
