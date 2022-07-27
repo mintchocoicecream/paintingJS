@@ -10,6 +10,7 @@ const save = document.getElementById("jsSave");
 const curColor = document.getElementById("curColor");
 const otherColor = document.getElementById("controlsSelect");
 const fileInput = document.getElementById("file");
+const textInput = document.getElementById("text");
 
 
 let INITIAL_COLOR = "2c2c2c";
@@ -22,6 +23,7 @@ ctx.fillStyle = "white";
 ctx.fillRect(0,0,canvas.width,canvas.height);
 ctx.strokeStyle = INITIAL_COLOR;
 ctx.lineWidth = 2.5;
+ctx.lineCap = "round";
 
 pen.style.backgroundColor = "rgb(215, 243, 255)";
 
@@ -130,6 +132,17 @@ function handleSaveBtn(){
     link.click();
 }
 
+function onDoubleClick(event){
+    const text = textInput.value;
+    if(text !== ""){
+        ctx.save();
+        ctx.lineWidth = 1;
+        ctx.font = "25px serif";
+        ctx.fillText(text, event.offsetX, event.offsetY);
+        ctx.restore();
+    };
+}
+
 if(canvas){
     canvas.addEventListener("mousemove", onMouseMove);
     canvas.addEventListener("mousedown", startPainting);
@@ -137,6 +150,7 @@ if(canvas){
     canvas.addEventListener("mouseleave", stopPainting);
     canvas.addEventListener("click", handleCanvasClick);
     canvas.addEventListener("contextmenu", handleCM);
+    canvas.addEventListener("dblclick", onDoubleClick);
 }
 
 
