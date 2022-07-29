@@ -3,6 +3,7 @@
 :root{
     --boxshadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);;
     --palletecolor: rgb(236, 242, 117);
+    --titlecolor: pink;
 }
 
 body {
@@ -10,15 +11,41 @@ body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     padding: 50px 0;
 }
 
-h1{
-    font-size: 35px;
+@keyframes showTitle {
+    0%{
+        transform: translateY(10px);
+        opacity: 0;
+    }
+    100%{
+
+    }
+}
+
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-weight: bold;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
+    animation: 1s ease-in-out showTitle;
+}
+
+h1{
+    color:var(--titlecolor);
+    font-size: 35px;
+    margin-bottom: 12px;
+}
+
+h2{
     color: white;
+    font-size: 25px;
+    margin-right: 15px;
+    font-weight: 500;
 }
 
 .contents{
@@ -28,6 +55,14 @@ h1{
     align-items: center;
 }
 
+@keyframes showCanvas{
+    0%{
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
 .canvas {
     width: 650px;
     height: 650px;
@@ -35,18 +70,60 @@ h1{
     border-radius: 15px;
     box-shadow: var(--boxshadow);
     cursor: url(cursor.cur), auto;
+    opacity: 0;
+    animation: 1s ease-in-out forwards showCanvas;
+    animation-delay: 1.2s;
+}
+
+@keyframes showControls1{
+    0%{
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+@keyframes showControls2{
+    0%{
+        transform: translateX(20px);
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
 }
 
 .controls {
     border-radius: 5px;
     background-color: var(--palletecolor);
     width: 350px;
-    margin-left: 20px;
-    padding: 30px 10px;
+    margin: 0 20px;
+    padding: 30px 20px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     box-shadow: var(--boxshadow);
+    opacity: 0;
+}
+
+.controls:first-child{
+    animation: 1s ease-in-out forwards showControls1;
+    animation-delay: 1.2s;
+}
+
+.controls:last-child{
+    animation: 1s ease-in-out forwards showControls2;
+    animation-delay: 1.2s;
+}
+
+fieldset {
+    border:1px solid rgba(0, 0, 0, 0.7);
+    padding: 8px 8px;
+    display: flex;
+    justify-content: center;
 }
 
 .controls .controls__logo{
@@ -55,14 +132,22 @@ h1{
 
 .controls .controls__range{
     margin-bottom: 30px;
+    width: 100%;
+}
+
+.controls .controls__range fieldset {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 input[type="range"] {
-    width: 250px;
+    width: 100%;
 }
 
 .controls .controls__btns {
     margin-bottom: 30px;
+    width: 100%;
 }
 
 .controls__btns button,
@@ -92,7 +177,7 @@ label{
     transform: scale(0.98);
 }
 
-.controls .controls__colors{
+.controls .controls__colors fieldset{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -195,8 +280,31 @@ label{
     width: 100%;
 }
 
+.controls__images fieldset{
+    flex-direction: column;
+    align-items: center;
+    width: 95%;
+}
+
+
 input#file{
     display: none;
+}
+
+.tools__text{
+    margin-bottom: 10px;
+    display: flex;
+    width: 90%;
+    justify-content: space-around;
+
+}
+
+.tools__text #fontSizes{
+    width: 25%;
+}
+
+.tools__text #fontTypes{
+    width: 40%;
 }
 
 input#text{

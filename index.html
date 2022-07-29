@@ -5,12 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
-    <title>Doodling</title>
+    <title>AiE: Art is Everywhere😏</title>
   </head>
   <body>
-    <h1>DOODLING</h1>
+    <div class="title">
+      <h1>A</h1>
+      <h2>rt</h2>
+      <h1>i</h1>
+      <h2>s</h2>
+      <h1>E</h1>
+      <h2>verywhere</h2>
+    </div>
     <div class="contents">
-      <canvas id="jsCanvas" class="canvas"></canvas>
       <div class="controls">
         <img
           class="controls__logo"
@@ -19,82 +25,114 @@
           alt="pallete"
         />
         <div class="controls__range">
-          <input
-            type="range"
-            id="jsRange"
-            min="1"
-            max="10"
-            value="5"
-            step="1"
-          />
-          <span id="jsCurRange" class="controls__crnt">5</span>
+          <fieldset>
+            <legend>Brush Size</legend>
+            <input
+              type="range"
+              id="jsRange"
+              min="1"
+              max="10"
+              value="5"
+              step="1"
+            />
+            <span id="jsCurRange" class="controls__crnt">5</span>
+          </fieldset>
         </div>
         <div class="controls__btns">
-          <button id="jsPen">Pen</button>
-          <button id="jsFill">Fill</button>
-          <button id="jsReset">Reset</button>
+          <fieldset>
+            <legend>Mode</legend>
+            <button id="jsPen">Pen</button>
+            <button id="jsFill">Fill</button>
+            <button id="jsReset">Reset</button>
+          </fieldset>
         </div>
         <div id="jsColors" class="controls__colors">
-          <div class="controls__curColors">
-            <h3>Selected Color :</h3>
-            <div
-              id="curColor"
-              class="controls__curColor"
-              style="background-color: #2c2c2c"
-            ></div>
-          </div>
-          <div class="controls__pallete">
-            <div
-              class="controls__color jsColor"
-              style="background-color: #2c2c2c"
-            ></div>
-            <div
-              class="controls__color jsColor"
-              style="background-color: rgb(255, 255, 255)"
-            ></div>
-            <div
-              class="controls__color jsColor"
-              style="background-color: #d1512d"
-            ></div>
-            <div
-              class="controls__color jsColor"
-              style="background-color: #ef5b0c"
-            ></div>
-            <div
-              class="controls__color jsColor"
-              style="background-color: #e6b325"
-            ></div>
-            <div
-              class="controls__color jsColor"
-              style="background-color: #5a8f7b"
-            ></div>
-            <div
-              class="controls__color jsColor"
-              style="background-color: #cee5d0"
-            ></div>
-            <div
-              class="controls__color jsColor"
-              style="background-color: #81cacf"
-            ></div>
-            <div
-              class="controls__color jsColor"
-              style="background-color: #b270a2"
-            ></div>
-            <div
-              class="controls__color jsColor"
-              style="background-color: #ff8fb1"
-            ></div>
-          </div>
-          <div class="controls__selects">
-            <input id="controlsSelect" type="color" />
-          </div>
+          <fieldset>
+            <legend>Colors</legend>
+            <div class="controls__curColors">
+              <h3>Selected Color :</h3>
+              <div
+                id="curColor"
+                class="controls__curColor"
+                style="background-color: #2c2c2c"
+              ></div>
+            </div>
+            <div class="controls__pallete">
+              <div
+                class="controls__color jsColor"
+                style="background-color: #2c2c2c"
+              ></div>
+              <div
+                class="controls__color jsColor"
+                style="background-color: rgb(255, 255, 255)"
+              ></div>
+              <div
+                class="controls__color jsColor"
+                style="background-color: #d1512d"
+              ></div>
+              <div
+                class="controls__color jsColor"
+                style="background-color: #ef5b0c"
+              ></div>
+              <div
+                class="controls__color jsColor"
+                style="background-color: #e6b325"
+              ></div>
+              <div
+                class="controls__color jsColor"
+                style="background-color: #5a8f7b"
+              ></div>
+              <div
+                class="controls__color jsColor"
+                style="background-color: #cee5d0"
+              ></div>
+              <div
+                class="controls__color jsColor"
+                style="background-color: #81cacf"
+              ></div>
+              <div
+                class="controls__color jsColor"
+                style="background-color: #b270a2"
+              ></div>
+              <div
+                class="controls__color jsColor"
+                style="background-color: #ff8fb1"
+              ></div>
+            </div>
+            <div class="controls__selects">
+              <input id="controlsSelect" type="color" />
+            </div>
+          </fieldset>
         </div>
+      </div>
+      <canvas id="jsCanvas" class="canvas"></canvas>
+      <div class="controls">
         <div id="jsImages" class="controls__images">
-          <label for="file">
-            ➕ Image
-            <input type="file" accept="image/*" id="file" />
-          </label>
-          <input type="text" placeholder="Add text here... :)" id="text" />
+          <fieldset>
+            <legend>Image</legend>
+            <label for="file" id="fileLabel">
+              ➕ Image
+              <input type="file" accept="image/*" id="file" />
+            </label>
+          </fieldset>
+          <fieldset>
+            <legend>Text</legend>
+            <div class="tools__text">
+              <input type="number" min="1" value="25" id="fontSizes" />
+              <select id="fontTypes" autocomplete="off" required>
+                <option>font1</option>
+                <option>font2</option>
+                <option>font3</option>
+                <option>font4</option>
+              </select>
+              <select id="fontWeights" required>
+                <option>Light</option>
+                <option selected>Midium</option>
+                <option>Bold</option>
+              </select>
+            </div>
+            <input type="text" placeholder="Add text here... :)" id="text" />
+          </fieldset>
         </div>
         <div class="controls__save">
           <button id="jsSave">Save</button>
