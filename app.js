@@ -10,6 +10,9 @@ const save = document.getElementById("jsSave");
 const curColor = document.getElementById("curColor");
 const otherColor = document.getElementById("controlsSelect");
 const fileInput = document.getElementById("file");
+const fontSizes = document.getElementById("fontSizes");
+const fontTypes = document.getElementById("fontTypes");
+const fontWeights = document.getElementById("fontWeights");
 const textInput = document.getElementById("text");
 
 
@@ -134,11 +137,16 @@ function handleSaveBtn(){
 
 function onDoubleClick(event){
     const text = textInput.value;
+    const textWeight = fontWeights.value;
+    const textSize = fontSizes.value;
+    const textFont = fontTypes.value;
+    console.log(textSize);
     if(text !== ""){
         ctx.save();
         ctx.lineWidth = 1;
-        ctx.font = "25px serif";
-        ctx.strokeText(text, event.offsetX, event.offsetY);
+        ctx.fillStyle = INITIAL_COLOR;
+        ctx.font = `${textWeight} ${textSize}px ${textFont}`;
+        ctx.fillText(text, event.offsetX, event.offsetY);
         ctx.restore();
     };
 }

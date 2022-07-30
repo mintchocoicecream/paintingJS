@@ -48,14 +48,16 @@
         </div>
         <div id="jsColors" class="controls__colors">
           <fieldset>
-            <legend>Colors</legend>
+            <legend>Pallete</legend>
             <div class="controls__curColors">
-              <h3>Selected Color :</h3>
-              <div
-                id="curColor"
-                class="controls__curColor"
-                style="background-color: #2c2c2c"
-              ></div>
+              <fieldset>
+                <legend>Selected Color</legend>
+                <div
+                  id="curColor"
+                  class="controls__curColor"
+                  style="background-color: #2c2c2c"
+                ></div>
+              </fieldset>
             </div>
             <div class="controls__pallete">
               <div
@@ -108,27 +110,57 @@
       <canvas id="jsCanvas" class="canvas"></canvas>
       <div class="controls">
         <div id="jsImages" class="controls__images">
-          <fieldset>
+          <fieldset class="controls__image">
             <legend>Image</legend>
             <label for="file" id="fileLabel">
               ➕ Image
               <input type="file" accept="image/*" id="file" />
             </label>
+            <!-- <img id="fileImage" /> -->
           </fieldset>
           <fieldset>
             <legend>Text</legend>
             <div class="tools__text">
               <input type="number" min="1" value="25" id="fontSizes" />
               <select id="fontTypes" autocomplete="off" required>
-                <option>font1</option>
-                <option>font2</option>
-                <option>font3</option>
-                <option>font4</option>
+                <option value="serif" style="font-family: serif">Serif</option>
+                <option value="sans-serif" style="font-family: sans-serif">
+                  Sans-serif
+                </option>
+                <option value="courier new" style="font-family: courier new">
+                  Courier New
+                </option>
+                <option
+                  value="Lucida Console"
+                  style="font-family: Lucida Console"
+                >
+                  Lucida Console
+                </option>
+                <option value="cursive" style="font-family: cursive">
+                  Cursive
+                </option>
+                <option
+                  value="Brush Script MT"
+                  style="font-family: Brush Script MT"
+                >
+                  Brush Script MT
+                </option>
+                <option
+                  value="lucida Handwriting"
+                  style="font-family: lucida Handwriting"
+                >
+                  Lucida Handwriting
+                </option>
+                <option value="copperplate" style="font-family: copperplate">
+                  Copperplate
+                </option>
+                <option value="papyrus" style="font-family: Papyrus">
+                  Papyrus
+                </option>
               </select>
               <select id="fontWeights" required>
-                <option>Light</option>
-                <option selected>Midium</option>
-                <option>Bold</option>
+                <option value="normal" selected>Normal</option>
+                <option value="bolder">Bold</option>
               </select>
             </div>
             <input type="text" placeholder="Add text here... :)" id="text" />
