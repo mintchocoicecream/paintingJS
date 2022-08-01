@@ -2,13 +2,15 @@
 
 :root{
     --boxshadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);;
-    --palletecolor: rgb(236, 242, 117);
+    /* --palletecolor: rgb(236, 242, 117); */
+    --palletecolor: rgb(8, 76, 8);
     --titlecolor: green;
-    --btncolor: rgb(215, 243, 255);
+    /* --btncolor: rgb(215, 243, 255); */
+    --btncolor: rgb(236, 242, 117);
 }
 
 body {
-    background-color: #75c1ff;
+    background-color: whitesmoke;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     display: flex;
     flex-direction: column;
@@ -29,6 +31,7 @@ body {
 
 .title{
     display: flex;
+    font-family: 'Courier New', Courier, monospace;
     justify-content: center;
     align-items: center;
     font-weight: bold;
@@ -39,11 +42,14 @@ body {
 h1{
     color:var(--titlecolor);
     font-size: 35px;
-    margin-bottom: 12px;
+    font-weight: bolder;
+    text-decoration: solid;
+    text-shadow: 1px 1px 2px black;
 }
 
 h2{
-    color: white;
+    color: black;
+    margin-right: 5px;
     font-size: 25px;
     font-weight: 500;
 }
@@ -98,7 +104,8 @@ h2{
 .controls {
     border-radius: 5px;
     background-color: var(--palletecolor);
-    width: 20%;
+    width: 350px;
+    height: 100%;
     margin: 0 20px;
     padding: 30px 20px;
     display: flex;
@@ -120,10 +127,12 @@ h2{
 }
 
 fieldset {
-    border:1px solid rgba(0, 0, 0, 0.7);
+    border:1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 5px;
     padding: 8px 8px;
     display: flex;
     justify-content: center;
+    color: white;
 }
 
 .controls .controls__logo{
@@ -339,6 +348,7 @@ input#text{
     border-radius: 10px;
     font-weight: 500;
     text-align: center;
+    color: black;
     background-color: white;
 }
 
