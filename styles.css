@@ -1,9 +1,10 @@
-@import "reset.css";
+@import "css/reset.css";
 
 :root{
     --boxshadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);;
     --palletecolor: rgb(236, 242, 117);
-    --titlecolor: pink;
+    --titlecolor: green;
+    --btncolor: rgb(215, 243, 255);
 }
 
 body {
@@ -44,7 +45,6 @@ h1{
 h2{
     color: white;
     font-size: 25px;
-    margin-right: 15px;
     font-weight: 500;
 }
 
@@ -64,12 +64,12 @@ h2{
 }
 
 .canvas {
-    width: 50%;
-    height: 50%;
+    /* width: 33%;
+    height: 33%; */
     background-color: white;
     border-radius: 15px;
     box-shadow: var(--boxshadow);
-    cursor: url(cursor.cur), auto;
+    cursor: url(cursors/cursor.cur), auto;
     opacity: 0;
     animation: 1s ease-in-out forwards showCanvas;
     animation-delay: 1.2s;
@@ -98,7 +98,7 @@ h2{
 .controls {
     border-radius: 5px;
     background-color: var(--palletecolor);
-    width: 25%;
+    width: 20%;
     margin: 0 20px;
     padding: 30px 20px;
     display: flex;
@@ -178,12 +178,16 @@ label{
 }
 
 .controls__btns button:hover{
-    background-color: rgb(215, 243, 255);
+    background-color: var(--btncolor);
     transition: .3s ease-in-out;
 }
 
 .controls__btns button:active{
     transform: scale(0.98);
+}
+
+.controls__btns .activated {
+    background-color: var(--btncolor);
 }
 
 .controls .controls__colors{

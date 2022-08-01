@@ -5,6 +5,7 @@ const range = document.getElementById("jsRange");
 const crnt_range = document.getElementById("jsCurRange");
 const pen = document.getElementById("jsPen");
 const fill = document.getElementById("jsFill");
+const eraser = document.getElementById("jsErase");
 const reset = document.getElementById("jsReset");
 const save = document.getElementById("jsSave");
 const curColor = document.getElementById("curColor");
@@ -22,37 +23,44 @@ const CANVAS_SIZE = 650;
 canvas.width = CANVAS_SIZE;
 canvas.height = CANVAS_SIZE;
 
-ctx.fillStyle = "white";
-ctx.fillRect(0,0,canvas.width,canvas.height);
-ctx.strokeStyle = INITIAL_COLOR;
-ctx.lineWidth = 2.5;
+ctx.lineWidth = range.value;
 ctx.lineCap = "round";
+let isPainting = false;
+let isFilling = false;
 
-pen.style.backgroundColor = "rgb(215, 243, 255)";
+// ctx.fillStyle = "white";
+// ctx.fillRect(0,0,canvas.width,canvas.height);
+ctx.strokeStyle = INITIAL_COLOR;
 
-let painting = false;
+
+// pen.style.backgroundColor = "rgb(215, 243, 255)";
+
+
 let mode = 0;
 
-function stopPainting() {
-    painting = false;
+
+function onMouseMove(event) {
+    if(isPainting) {
+        ctx.lineTo(event.offsetX, event.offsetY);
+        ctx.stroke();
+        return;
+    }
+    ctx.moveTo(event.offsetX, event.offsetY);
 }
 
 function startPainting() {
-    painting = true;
+    isPainting = true;
 }
 
-function onMouseMove(event) {
-    const x = event.offsetX;
-    const y = event.offsetY;
-    if(!painting){
-        ctx.beginPath();
-        ctx.moveTo(x,y);
-    } else{
-        if(!mode){
-            ctx.lineTo(x,y);
-            ctx.stroke();
-        }
-    }
+function stopPainting() {
+    isPainting = false;
+    ctx.beginPath();
+}
+
+function handleRangeChange(event){
+    const size = event.target.value;
+    ctx.lineWidth = size;
+    crnt_range.innerText = size;
 }
 
 function handleColorClick(event){
@@ -72,43 +80,55 @@ function handleOtherColor(event){
     ctx.fillStyle = INITIAL_COLOR;
 }
 
-function handleRangeChange(event){
-    const size = event.target.value;
-    ctx.lineWidth = size;
-    crnt_range.innerText = size;
-}
-
 function handleColorPen(){
     mode = 0;
-    canvas.style.cursor = "url(cursor.cur), auto";
-    pen.style.backgroundColor = "rgb(215, 243, 255)";
-    fill.style.backgroundColor = "white";
-    reset.style.backgroundColor = "white";
+    canvas.style.cursor = "url(cursors/cursor.cur), auto";
+    pen.classList.add("activated");
+    fill.classList.remove("activated");
+    eraser.classList.remove("activated");
+    reset.classList.remove("activated");
 }
 
 function handleColorFill(){
     mode = 1;
-    canvas.style.cursor = "url(paint.cur), auto";
-    fill.style.backgroundColor = "rgb(215, 243, 255)";
-    pen.style.backgroundColor = "white";
-    reset.style.backgroundColor = "white";
+    canvas.style.cursor = "url(cursors/paint.cur), auto";
+    fill.classList.add("activated");
+    pen.classList.remove("activated");
+    eraser.classList.remove("activated");
+    reset.classList.remove("activated");
+}
+
+function handleEraser(){
+    mode = 2;
+    canvas.style.cursor = "url(cursors/erase.cur), auto";
+    eraser.classList.add("activated");
+    pen.classList.remove("activated");
+    fill.classList.remove("activated");
+    reset.classList.remove("activated");
+    ctx.strokeStyle = "white";
+    isFilling = false;
 }
 
 function handleReset(){
-    mode = 2;
-    canvas.style.cursor = "url(erase.cur), auto";
-    reset.style.backgroundColor = "rgb(215, 243, 255)";
-    pen.style.backgroundColor = "white";
-    fill.style.backgroundColor = "white";
+    mode = 3;
+    canvas.style.cursor = "url(cursors/reset.cur), auto";
+    reset.classList.add("activated");
+    pen.classList.remove("activated");
+    eraser.classList.remove("activated");
+    fill.classList.remove("activated");
 }
 
 function handleCanvasClick(){
     if(mode===1){
         ctx.fillStyle = INITIAL_COLOR;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-    }else if(mode ===2 ){
-        ctx.fillStyle = "white";
-        ctx.fillRect(0,0,canvas.width,canvas.height);
+    }else if(mode ===3 ){
+        if(window.confirm(
+            "Are you sure to empty everything?"
+        )){
+            ctx.fillStyle = "white";
+            ctx.fillRect(0,0,canvas.width,canvas.height);
+        }
     }
 }
 
@@ -120,7 +140,7 @@ function onFileChange(event){
     image.onload = function(){
         ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
         fileInput.value = null;
-    }
+    };
 }
 
 function handleCM(event){
@@ -176,6 +196,10 @@ if(pen){
 
 if(fill){
     fill.addEventListener("click", handleColorFill);
+}
+
+if(eraser){
+    eraser.addEventListener("click", handleEraser);
 }
 
 if(otherColor) {
