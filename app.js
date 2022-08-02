@@ -12,6 +12,7 @@ const reset = document.getElementById("jsReset");
 const save = document.getElementById("jsSave");
 const otherColor = document.getElementById("controlsSelect");
 const fileInput = document.getElementById("file");
+const fileUpload = document.getElementById("fileUpload");
 const fontSizes = document.getElementById("fontSizes");
 const fontTypes = document.getElementById("fontTypes");
 const fontWeights = document.getElementById("fontWeights");
@@ -32,7 +33,9 @@ let isFilling = false;
 ctx.strokeStyle = INITIAL_COLOR;
 
 let mode = 0;
+let uploadImage;
 
+console.log(`uploadImage01 ${uploadImage}`);
 
 function onMouseMove(event) {
     if(isPainting) {
@@ -112,7 +115,24 @@ function handleReset(){
     fill.classList.remove("activated");
 }
 
-function handleCanvasClick(){
+
+function onFileChange(event){
+    mode = 4;
+    const file = event.target.files[0];
+    const url = URL.createObjectURL(file);
+    uploadImage = new Image();
+    uploadImage.src = url;
+    console.log(`uploadImage01 ${uploadImage.src}`);
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        document.getElementById("imgPreview").src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+    canvas.style.cursor = "crosshair";
+    fileInput.value = null;
+}
+
+function handleCanvasClick(event){
     if(mode===1){
         ctx.fillStyle = INITIAL_COLOR;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -123,18 +143,15 @@ function handleCanvasClick(){
             ctx.fillStyle = "white";
             ctx.fillRect(0,0,canvas.width,canvas.height);
         }
+    }else if(mode===4){
+        ctx.drawImage(uploadImage, event.offsetX, event.offsetY, uploadImage.width/2, uploadImage.height/2);
     }
 }
 
-function onFileChange(event){
-    const file = event.target.files[0];
-    const url = URL.createObjectURL(file);
-    const image = new Image();
-    image.src = url;
-    image.onload = function(){
-        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-        fileInput.value = null;
-    };
+function handleImgUpload(){
+    if(uploadImage){
+        ctx.drawImage(uploadImage, 0, 0, canvas.width, canvas.height);
+    }
 }
 
 function handleCM(event){
@@ -202,6 +219,10 @@ if(otherColor) {
 
 if(reset){
     reset.addEventListener("click", handleReset);
+}
+
+if(fileUpload) {
+    fileUpload.addEventListener("click", handleImgUpload);
 }
 
 if(save){
