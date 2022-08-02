@@ -1,6 +1,8 @@
 const canvas = document.getElementById("jsCanvas");
 const ctx = canvas.getContext("2d");
-const colors = document.getElementsByClassName("jsColor");
+const colors = Array.from(
+    document.getElementsByClassName("controls__color")
+  );
 const range = document.getElementById("jsRange");
 const crnt_range = document.getElementById("jsCurRange");
 const pen = document.getElementById("jsPen");
@@ -8,7 +10,6 @@ const fill = document.getElementById("jsFill");
 const eraser = document.getElementById("jsErase");
 const reset = document.getElementById("jsReset");
 const save = document.getElementById("jsSave");
-const curColor = document.getElementById("curColor");
 const otherColor = document.getElementById("controlsSelect");
 const fileInput = document.getElementById("file");
 const fontSizes = document.getElementById("fontSizes");
@@ -28,13 +29,7 @@ ctx.lineCap = "round";
 let isPainting = false;
 let isFilling = false;
 
-// ctx.fillStyle = "white";
-// ctx.fillRect(0,0,canvas.width,canvas.height);
 ctx.strokeStyle = INITIAL_COLOR;
-
-
-// pen.style.backgroundColor = "rgb(215, 243, 255)";
-
 
 let mode = 0;
 
@@ -64,18 +59,17 @@ function handleRangeChange(event){
 }
 
 function handleColorClick(event){
-    // console.log(event.target.style);
-    const color = event.target.style.backgroundColor;
-    INITIAL_COLOR = color;
-    curColor.style.backgroundColor = INITIAL_COLOR;
-    ctx.strokeStyle = INITIAL_COLOR;
-    ctx.fillStyle = INITIAL_COLOR;
+    if(mode !== 2){
+        const color = event.target.dataset.color;
+        ctx.strokeStyle = color;
+        ctx.fillStyle = color;
+        otherColor.value = color;
+    }
 }
 
 function handleOtherColor(event){
     const oColor = event.target.value;
     INITIAL_COLOR = oColor;
-    curColor.style.backgroundColor = INITIAL_COLOR;
     ctx.strokeStyle = INITIAL_COLOR;
     ctx.fillStyle = INITIAL_COLOR;
 }
