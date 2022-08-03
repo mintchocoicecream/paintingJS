@@ -177,17 +177,18 @@ input[type="range"] {
 
 .controls .controls__btns fieldset{
     display: flex;
-    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.controls__btns button,
-.controls__save button,
-.controls__imagebtn button,
+button,
 label{
     all: unset;
     cursor: pointer;
     background-color: white;
     padding: 5px 0px;
+    margin: 3px 0;
     border-radius: 5px;
     width: 23%;
     text-align: center;
@@ -203,14 +204,15 @@ label{
     width: 250px;
 }
 
-.controls__btns button:hover,
-.controls__images label:hover,
-.controls__imagebtn button:hover {
+
+label:hover,
+button:hover {
     background-color: var(--btncolor);
     transition: .3s ease-in-out;
 }
 
-.controls__btns button:active{
+.controls__btns button:active,
+.controls__btns label:active{
     transform: scale(0.98);
 }
 
@@ -340,17 +342,6 @@ label{
     height: fit-content;
 }
 
-.controls__imagebtn {
-    display: flex;
-    width: 90%;
-    justify-content: space-between;
-    align-items: center;
-    margin: 10px 0;
-}
-
-.controls__image{
-    height: 400px;
-}
 
 #previews {
     display: flex;

@@ -39,7 +39,14 @@
             <legend>Mode</legend>
             <button id="jsPen" class="activated">Pen</button>
             <button id="jsFill">Fill</button>
+            <button id="jsRect">Rectangle</button>
+            <button id="jsCircle">Circle</button>
             <button id="jsErase">Eraser</button>
+            <button id="uploadText">Text</button>
+            <label for="file" id="fileLabel">
+              Image
+              <input type="file" accept="image/*" id="file" />
+            </label>
             <button id="jsReset">Empty</button>
           </fieldset>
         </div>
@@ -109,13 +116,6 @@
         <div id="jsImages" class="controls__images">
           <fieldset class="controls__image">
             <legend>Image</legend>
-            <div class="controls__imagebtn">
-              <label for="file" id="fileLabel">
-                ➕ Image
-                <input type="file" accept="image/*" id="file" />
-              </label>
-              <button id="fileUpload">Upload</button>
-            </div>
             <div class="previews">
               <img id="imgPreview" src="/mintchoco01.png" />
             </div>

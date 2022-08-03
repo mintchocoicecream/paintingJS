@@ -10,13 +10,17 @@ const fill = document.getElementById("jsFill");
 const eraser = document.getElementById("jsErase");
 const reset = document.getElementById("jsReset");
 const save = document.getElementById("jsSave");
+const rect = document.getElementById("jsRect");
+const circle = document.getElementById("jsCircle");
 const otherColor = document.getElementById("controlsSelect");
+const fileBtn = document.getElementById("fileLabel");
 const fileInput = document.getElementById("file");
 const fileUpload = document.getElementById("fileUpload");
 const fontSizes = document.getElementById("fontSizes");
 const fontTypes = document.getElementById("fontTypes");
 const fontWeights = document.getElementById("fontWeights");
 const textInput = document.getElementById("text");
+const uploadText = document.getElementById("uploadText");
 
 
 let INITIAL_COLOR = "2c2c2c";
@@ -35,19 +39,38 @@ ctx.strokeStyle = INITIAL_COLOR;
 let mode = 0;
 let uploadImage;
 
+let rectX = 0;
+let rectY = 0;
+
 console.log(`uploadImage01 ${uploadImage}`);
 
 function onMouseMove(event) {
     if(isPainting) {
-        ctx.lineTo(event.offsetX, event.offsetY);
-        ctx.stroke();
-        return;
+        if(mode === 0 || mode === 2){
+            ctx.lineTo(event.offsetX, event.offsetY);
+            ctx.stroke();
+            return;
+        }else if(mode === 6){
+            const x = event.offsetX;
+            const y = event.offsetY;
+             
+            const width = x - rectX;
+            const height = y - rectY;
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.fillRect(rectX, rectY, width, height);
+        };
     }
     ctx.moveTo(event.offsetX, event.offsetY);
 }
 
-function startPainting() {
+function startPainting(event) {
     isPainting = true;
+    if(mode === 6){
+        rectX = event.offsetX;
+            rectY = event.offsetY;
+            ctx.beginPath();
+    }
 }
 
 function stopPainting() {
@@ -83,7 +106,11 @@ function handleColorPen(){
     pen.classList.add("activated");
     fill.classList.remove("activated");
     eraser.classList.remove("activated");
+    uploadText.classList.remove("activated");
     reset.classList.remove("activated");
+    fileBtn.classList.remove("activated");
+    rect.classList.remove("activated");
+    circle.classList.remove("activated");
 }
 
 function handleColorFill(){
@@ -92,7 +119,11 @@ function handleColorFill(){
     fill.classList.add("activated");
     pen.classList.remove("activated");
     eraser.classList.remove("activated");
+    uploadText.classList.remove("activated");
     reset.classList.remove("activated");
+    fileBtn.classList.remove("activated");
+    rect.classList.remove("activated");
+    circle.classList.remove("activated");
 }
 
 function handleEraser(){
@@ -101,10 +132,15 @@ function handleEraser(){
     eraser.classList.add("activated");
     pen.classList.remove("activated");
     fill.classList.remove("activated");
+    uploadText.classList.remove("activated");
     reset.classList.remove("activated");
+    fileBtn.classList.remove("activated");
+    rect.classList.remove("activated");
+    circle.classList.remove("activated");
     ctx.strokeStyle = "white";
     isFilling = false;
 }
+
 
 function handleReset(){
     mode = 3;
@@ -113,6 +149,10 @@ function handleReset(){
     pen.classList.remove("activated");
     eraser.classList.remove("activated");
     fill.classList.remove("activated");
+    uploadText.classList.remove("activated");
+    fileBtn.classList.remove("activated");
+    rect.classList.remove("activated");
+    circle.classList.remove("activated");
 }
 
 
@@ -122,31 +162,52 @@ function onFileChange(event){
     const url = URL.createObjectURL(file);
     uploadImage = new Image();
     uploadImage.src = url;
-    console.log(`uploadImage01 ${uploadImage.src}`);
     const reader = new FileReader();
     reader.onload = function(e) {
         document.getElementById("imgPreview").src = e.target.result;
     };
     reader.readAsDataURL(file);
-    canvas.style.cursor = "crosshair";
     fileInput.value = null;
 }
 
-function handleCanvasClick(event){
-    if(mode===1){
-        ctx.fillStyle = INITIAL_COLOR;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-    }else if(mode ===3 ){
-        if(window.confirm(
-            "Are you sure to empty everything?"
-        )){
-            ctx.fillStyle = "white";
-            ctx.fillRect(0,0,canvas.width,canvas.height);
-        }
-    }else if(mode===4){
-        ctx.drawImage(uploadImage, event.offsetX, event.offsetY, uploadImage.width/2, uploadImage.height/2);
-    }
+function handleRect(){
+    mode = 6;
+    canvas.style.cursor = "crosshair";
+    rect.classList.add("activated");
+    circle.classList.remove("activated");
+    reset.classList.remove("activated");
+    pen.classList.remove("activated");
+    eraser.classList.remove("activated");
+    fill.classList.remove("activated");
+    uploadText.classList.remove("activated");
+    fileBtn.classList.remove("activated");
 }
+
+function handleCircle(){
+    mode = 7;
+    canvas.style.cursor = "crosshair";
+    circle.classList.add("activated");
+    rect.classList.remove("activated");
+    reset.classList.remove("activated");
+    pen.classList.remove("activated");
+    eraser.classList.remove("activated");
+    fill.classList.remove("activated");
+    uploadText.classList.remove("activated");
+    fileBtn.classList.remove("activated");
+}
+
+function handleImageBtn(){
+    canvas.style.cursor = "url(cursors/Addimage.cur), auto";
+    reset.classList.remove("activated");
+    pen.classList.remove("activated");
+    eraser.classList.remove("activated");
+    uploadText.classList.remove("activated");
+    fill.classList.remove("activated");
+    fileBtn.classList.add("activated");
+    rect.classList.remove("activated");
+    circle.classList.remove("activated");
+}
+
 
 function handleImgUpload(){
     if(uploadImage){
@@ -166,21 +227,51 @@ function handleSaveBtn(){
     link.click();
 }
 
-function onDoubleClick(event){
-    const text = textInput.value;
-    const textWeight = fontWeights.value;
-    const textSize = fontSizes.value;
-    const textFont = fontTypes.value;
-    console.log(textSize);
-    if(text !== ""){
-        ctx.save();
-        ctx.lineWidth = 1;
-        ctx.fillStyle = INITIAL_COLOR;
-        ctx.font = `${textWeight} ${textSize}px ${textFont}`;
-        ctx.fillText(text, event.offsetX, event.offsetY);
-        ctx.restore();
-    };
+
+function handleTextUpload(){
+    mode = 5;
+    canvas.style.cursor = "url(cursors/text.cur), auto";
+    reset.classList.remove("activated");
+    pen.classList.remove("activated");
+    eraser.classList.remove("activated");
+    uploadText.classList.add("activated");
+    fill.classList.remove("activated");
+    fileBtn.classList.remove("activated");
+    rect.classList.remove("activated");
+    circle.classList.remove("activated");
 }
+
+
+function handleCanvasClick(event){
+    if(mode===1){
+        ctx.fillStyle = INITIAL_COLOR;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }else if(mode ===3 ){
+        if(window.confirm(
+            "Are you sure to empty everything?"
+        )){
+            ctx.fillStyle = "white";
+            ctx.fillRect(0,0,canvas.width,canvas.height);
+        }
+    }else if(mode===4){
+        ctx.drawImage(uploadImage, event.offsetX, event.offsetY, uploadImage.width/2, uploadImage.height/2);
+    }else if(mode===5){
+        const text = textInput.value;
+        const textWeight = fontWeights.value;
+        const textSize = fontSizes.value;
+        const textFont = fontTypes.value;
+        
+        if(text !== ""){
+            ctx.save();
+            ctx.lineWidth = 1;
+            ctx.fillStyle = INITIAL_COLOR;
+            ctx.font = `${textWeight} ${textSize}px ${textFont}`;
+            ctx.fillText(text, event.offsetX, event.offsetY);
+            ctx.restore();
+        };
+    }
+}
+
 
 if(canvas){
     canvas.addEventListener("mousemove", onMouseMove);
@@ -189,7 +280,7 @@ if(canvas){
     canvas.addEventListener("mouseleave", stopPainting);
     canvas.addEventListener("click", handleCanvasClick);
     canvas.addEventListener("contextmenu", handleCM);
-    canvas.addEventListener("dblclick", onDoubleClick);
+    // canvas.addEventListener("dblclick", onDoubleClick);
 }
 
 
@@ -213,6 +304,14 @@ if(eraser){
     eraser.addEventListener("click", handleEraser);
 }
 
+if(rect){
+    rect.addEventListener("click", handleRect);
+}
+
+if(circle){
+    circle.addEventListener("click", handleCircle);
+}
+
 if(otherColor) {
     otherColor.addEventListener("input", handleOtherColor);
 }
@@ -221,8 +320,16 @@ if(reset){
     reset.addEventListener("click", handleReset);
 }
 
+if(fileBtn){
+    fileBtn.addEventListener("click", handleImageBtn);
+}
+
 if(fileUpload) {
     fileUpload.addEventListener("click", handleImgUpload);
+}
+
+if(uploadText){
+    uploadText.addEventListener("click", handleTextUpload);
 }
 
 if(save){
