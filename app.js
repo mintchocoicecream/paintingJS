@@ -53,13 +53,17 @@ function onMouseMove(event) {
         }else if(mode === 6){
             const x = event.offsetX;
             const y = event.offsetY;
-             
             const width = x - rectX;
             const height = y - rectY;
             ctx.beginPath();
             ctx.moveTo(x, y);
             ctx.fillRect(rectX, rectY, width, height);
-        };
+        }else if(mode === 7){
+            const circleX = event.offsetX;
+            const cwidth = circleX - rectX;
+            ctx.arc(rectX, rectY, cwidth, 0, Math.PI*2, true);
+            ctx.fill();
+        }
     }
     ctx.moveTo(event.offsetX, event.offsetY);
 }
@@ -68,8 +72,11 @@ function startPainting(event) {
     isPainting = true;
     if(mode === 6){
         rectX = event.offsetX;
-            rectY = event.offsetY;
-            ctx.beginPath();
+        rectY = event.offsetY;
+        ctx.beginPath();
+    }else if(mode == 7){
+        rectX = event.offsetX;
+        rectY = event.offsetY;
     }
 }
 
@@ -82,6 +89,36 @@ function handleRangeChange(event){
     const size = event.target.value;
     ctx.lineWidth = size;
     crnt_range.innerText = size;
+}
+
+function handleCanvasClick(event){
+    if(mode===1){
+        ctx.fillStyle = INITIAL_COLOR;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }else if(mode ===3 ){
+        if(window.confirm(
+            "Are you sure to empty everything?"
+        )){
+            ctx.fillStyle = "white";
+            ctx.fillRect(0,0,canvas.width,canvas.height);
+        }
+    }else if(mode===4){
+        ctx.drawImage(uploadImage, event.offsetX, event.offsetY, uploadImage.width/2, uploadImage.height/2);
+    }else if(mode===5){
+        const text = textInput.value;
+        const textWeight = fontWeights.value;
+        const textSize = fontSizes.value;
+        const textFont = fontTypes.value;
+        
+        if(text !== ""){
+            ctx.save();
+            ctx.lineWidth = 1;
+            ctx.fillStyle = INITIAL_COLOR;
+            ctx.font = `${textWeight} ${textSize}px ${textFont}`;
+            ctx.fillText(text, event.offsetX, event.offsetY);
+            ctx.restore();
+        };
+    }
 }
 
 function handleColorClick(event){
@@ -242,35 +279,7 @@ function handleTextUpload(){
 }
 
 
-function handleCanvasClick(event){
-    if(mode===1){
-        ctx.fillStyle = INITIAL_COLOR;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-    }else if(mode ===3 ){
-        if(window.confirm(
-            "Are you sure to empty everything?"
-        )){
-            ctx.fillStyle = "white";
-            ctx.fillRect(0,0,canvas.width,canvas.height);
-        }
-    }else if(mode===4){
-        ctx.drawImage(uploadImage, event.offsetX, event.offsetY, uploadImage.width/2, uploadImage.height/2);
-    }else if(mode===5){
-        const text = textInput.value;
-        const textWeight = fontWeights.value;
-        const textSize = fontSizes.value;
-        const textFont = fontTypes.value;
-        
-        if(text !== ""){
-            ctx.save();
-            ctx.lineWidth = 1;
-            ctx.fillStyle = INITIAL_COLOR;
-            ctx.font = `${textWeight} ${textSize}px ${textFont}`;
-            ctx.fillText(text, event.offsetX, event.offsetY);
-            ctx.restore();
-        };
-    }
-}
+
 
 
 if(canvas){
