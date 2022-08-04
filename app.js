@@ -97,7 +97,7 @@ function handleCanvasClick(event){
         ctx.fillRect(0, 0, canvas.width, canvas.height);
     }else if(mode ===3 ){
         if(window.confirm(
-            "Are you sure to empty everything?"
+            "확인을 누르시면 모든 작업이 취소됩니다."
         )){
             ctx.fillStyle = "white";
             ctx.fillRect(0,0,canvas.width,canvas.height);
@@ -113,7 +113,7 @@ function handleCanvasClick(event){
         if(text !== ""){
             ctx.save();
             ctx.lineWidth = 1;
-            ctx.fillStyle = INITIAL_COLOR;
+            // ctx.fillStyle = INITIAL_COLOR;
             ctx.font = `${textWeight} ${textSize}px ${textFont}`;
             ctx.fillText(text, event.offsetX, event.offsetY);
             ctx.restore();
