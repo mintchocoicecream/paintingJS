@@ -22,7 +22,6 @@ const fontWeights = document.getElementById("fontWeights");
 const textInput = document.getElementById("text");
 const uploadText = document.getElementById("uploadText");
 
-
 let INITIAL_COLOR = "2c2c2c";
 const CANVAS_SIZE = 650;
 
@@ -178,7 +177,6 @@ function handleEraser(){
     isFilling = false;
 }
 
-
 function handleReset(){
     mode = 3;
     canvas.style.cursor = "url(cursors/reset.cur), auto";
@@ -191,7 +189,6 @@ function handleReset(){
     rect.classList.remove("activated");
     circle.classList.remove("activated");
 }
-
 
 function onFileChange(event){
     mode = 4;
@@ -245,7 +242,6 @@ function handleImageBtn(){
     circle.classList.remove("activated");
 }
 
-
 function handleImgUpload(){
     if(uploadImage){
         ctx.drawImage(uploadImage, 0, 0, canvas.width, canvas.height);
@@ -264,7 +260,6 @@ function handleSaveBtn(){
     link.click();
 }
 
-
 function handleTextUpload(){
     mode = 5;
     canvas.style.cursor = "url(cursors/text.cur), auto";
@@ -277,10 +272,6 @@ function handleTextUpload(){
     rect.classList.remove("activated");
     circle.classList.remove("activated");
 }
-
-
-
-
 
 if(canvas){
     canvas.addEventListener("mousemove", onMouseMove);

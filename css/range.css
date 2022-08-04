@@ -1,0 +1,44 @@
+.controls .controls__range{
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.controls .controls__range fieldset {
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+
+/* input[type="range"]*/
+
+input[type="range"] {
+    overflow: hidden;
+    height: 10px;
+    -webkit-appearance: none;
+    margin: 10px 5px;
+    width: 100%;
+    background: transparent;
+}
+
+input[type="range"]:focus {
+	outline: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 2px solid pink;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 30px;
+    background: var(--btncolor);
+    margin-top: -5px;
+    box-shadow: 1px 1px 7px var(--btncolor);
+    cursor: pointer;
+    box-shadow: -100vw 0 0 100vw pink;
+}

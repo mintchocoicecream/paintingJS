@@ -1,0 +1,56 @@
+button,
+label{
+    all: unset;
+    cursor: pointer;
+    background-color: white;
+    padding: 5px 0px;
+    margin: 3px 0;
+    border-radius: 5px;
+    width: 23%;
+    text-align: center;
+    box-shadow: var(--boxshadow);
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    color: rgba(0, 0, 0, 0.7);
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 12px;
+}
+
+.controls__save button{
+    width: 250px;
+}
+
+
+label:hover,
+button:hover {
+    background-color: var(--btncolor);
+    transition: .3s ease-in-out;
+}
+
+.controls__btns button:active,
+.controls__btns label:active{
+    transform: scale(0.98);
+}
+
+.controls__btns .activated {
+    background-color: var(--btncolor);
+}
+
+.controls__save {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 10px;
+    margin-top: 30px;
+}
+
+.controls__save button{
+    width: 10%;
+    padding: 10px 5px;
+}
+
+.controls__save button:hover{
+    background-color: pink;
+    color: white;
+    transition: .2s ease-in-out;
+}
