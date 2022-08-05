@@ -14,10 +14,6 @@
     --btncolor: rgb(236, 242, 117);
 }
 
-/* html{
-    height: 100%;
-    padding: 20px 0;
-} */
 
 body {
     background-color: whitesmoke;
@@ -28,6 +24,7 @@ body {
     justify-content: center;
     align-items: center;
     margin-top: 50px;
+    position: relative;
 }
 
 footer{
@@ -82,6 +79,28 @@ h2{
     margin-bottom: 100px;
 }
 
+.screen{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-color: whitesmoke;
+    width: 100%;
+    height: inherit;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+}
+
+.screen img{
+    margin-bottom: 15px;
+}
+
+@media (max-width: 1380px) {
+    .screen{
+        visibility: visible;
+    }
+}
+
 @keyframes showCanvas{
     0%{
     }
@@ -91,8 +110,6 @@ h2{
 }
 
 .canvas {
-    /* width: 33%;
-    height: 33%; */
     background-color: white;
     border-radius: 15px;
     box-shadow: var(--boxshadow);
